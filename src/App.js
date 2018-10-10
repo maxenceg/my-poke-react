@@ -1,31 +1,17 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import './App.css';
-import Pokemon from './components/Pokemon/Pokemon.js';
+import HomePage from './pages/HomePage/HomePage';
 
 import { BrowserRouter, Route } from 'react-router-dom';
-import DetailPage from './components/Pokemon/DetailPage';
+import DetailPage from './pages/DetailPage/DetailPage';
 
-class App extends Component {
+export const App = () => (
+  <BrowserRouter>
+    <Fragment>
+      <Route exact path="/" component={HomePage} />
+      <Route path={`/detail-page/:id`} component={DetailPage} />
+    </Fragment>
+  </BrowserRouter>
+)
 
-  render() {
-    var rows = [];
-    for (var i = 1; i < 10; i++) {
-        // note: we add a key prop here to allow react to uniquely identify each
-        // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
-        rows.push(<Pokemon key={i} pokemonId={i} />);
-    }
-    return (
-      <div>
-        {rows}
-        <BrowserRouter>
-          <Fragment>
-            <Route exact path="/detail-page" component={DetailPage}/>
-          </Fragment>
-        </BrowserRouter>
-      </div>
-    );
-  }
-
-}
-
-export default App;
+export default HomePage;
